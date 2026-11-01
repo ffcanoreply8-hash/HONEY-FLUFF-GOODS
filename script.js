@@ -991,3 +991,29 @@ if(!document.body.dataset.page&&$('#launchDialog')){
     addReviewPhotos();
   }
 })();
+// CONNECT ALL 9 ICE CREAM PHOTOS
+(() => {
+  const iceCreamImages = {
+    'cloud': 'cotton-cloud.png',
+    'berry': 'berry-daydream.png',
+    'vanilla': 'vanilla-reverie.png',
+    'ice-1': 'pistachio-velvet.png',
+    'ice-2': 'salted-caramel-drift.png',
+    'ice-3': 'midnight-cocoa.png',
+    'ice-4': 'mango-solstice.png',
+    'ice-5': 'mint-moon.png',
+    'ice-6': 'coffee-cloud.png'
+  };
+
+  treats.forEach(product => {
+    const filename = iceCreamImages[product.id];
+
+    if (filename) {
+      product.image = 'images/' + filename;
+      product.imageAlt = product.name + ' ice cream tub';
+    }
+  });
+
+  render();
+  renderFeatured();
+})();
