@@ -816,6 +816,23 @@ const treats = [
     "imageAlt": ""
   }
 ];
+const drinkImages = {
+  "drink-1": "strawberry-cloud.png",
+  "drink-2": "peach-sunset-fizz.png",
+  "drink-3": "blue-raspberry-breeze.png",
+  "drink-4": "mango-cream-dream.png",
+  "drink-6": "vanilla-cream-float.png",
+  "drink-7": "cherry-moon-soda.png",
+  "drink-8": "pineapple-coconut-cooler.png",
+  "drink-9": "lavender-lemon-fizz.png"
+};
+
+treats.forEach(product => {
+  if (drinkImages[product.id]) {
+    product.image = "images/" + drinkImages[product.id];
+    product.imageAlt = product.name + " can";
+  }
+});
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const money = cents => new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(cents / 100);
