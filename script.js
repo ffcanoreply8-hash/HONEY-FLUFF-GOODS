@@ -946,3 +946,48 @@ if(!document.body.dataset.page&&$('#launchDialog')){
  const dismissed=Number(safeRead('honeyfluff-launch-dismissed',0));
  if(!Number.isFinite(dismissed)||Date.now()-dismissed>HF_CONFIG.popupDismissDays*86400000)setTimeout(()=>{if(!document.querySelector('dialog[open]')){$('#launchDialog').showModal();document.body.classList.add('modal-open');}},900);
 }
+// Sweet Reviews photos
+(() => {
+  function addReviewPhotos() {
+    const slots = document.querySelectorAll(
+      '#reviewGrid .review-placeholder'
+    );
+
+    slots.forEach((slot, index) => {
+      const number = index + 1;
+      const paths = [
+        `images/review-${number}.png`,
+        `images/review-${number}.jpg`,
+        `images/review-${number}.webp`,
+        `images/review-${number}.jpeg`
+      ];
+
+      const img = document.createElement('img');
+      img.className = 'review-image';
+      img.alt = `Honey Fluff promotional photo ${number}`;
+      img.loading = 'lazy';
+      img.style.cssText =
+        'display:block;width:100%;height:100%;object-fit:cover;';
+
+      let attempt = 0;
+      img.onerror = () => {
+        attempt += 1;
+        if (attempt < paths.length) {
+          img.src = paths[attempt];
+        } else {
+          img.replaceWith(slot);
+          console.warn('Review photo not found:', paths);
+        }
+      };
+
+      slot.replaceWith(img);
+      img.src = paths[0];
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addReviewPhotos);
+  } else {
+    addReviewPhotos();
+  }
+})();
