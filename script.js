@@ -1043,3 +1043,29 @@ if(!document.body.dataset.page&&$('#launchDialog')){
   render();
   renderFeatured();
 })();
+// CONNECT ALL 9 BROWNIE PHOTOS
+(() => {
+  const brownieImages = {
+    'brownie-1': 'classic-fudge.png',
+    'brownie-2': 'salted-caramel-swirl.png',
+    'brownie-3': 'raspberry-truffle.png',
+    'brownie-4': 'walnut-wonder.png',
+    'brownie-5': 'cookies-and-cream-brownie.png',
+    'brownie-6': 'peanut-butter-ripple.png',
+    'brownie-7': 'espresso-midnight.png',
+    'brownie-8': 'white-chocolate-marble.png',
+    'brownie-9': 'pistachio-fudge.png'
+  };
+
+  treats.forEach(product => {
+    const filename = brownieImages[product.id];
+
+    if (filename) {
+      product.image = 'images/' + filename;
+      product.imageAlt = product.name + ' four-brownie box';
+    }
+  });
+
+  render();
+  renderFeatured();
+})();
