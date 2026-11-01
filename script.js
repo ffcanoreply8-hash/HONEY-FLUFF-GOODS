@@ -1017,3 +1017,29 @@ if(!document.body.dataset.page&&$('#launchDialog')){
   render();
   renderFeatured();
 })();
+// CONNECT ALL 9 GUMMY PHOTOS
+(() => {
+  const gummyImages = {
+    'gummy-1': 'peachy-clouds.png',
+    'gummy-2': 'strawberry-skies.png',
+    'gummy-3': 'watermelon-waves.png',
+    'gummy-4': 'mango-tango.png',
+    'gummy-5': 'blueberry-bliss.png',
+    'gummy-6': 'sour-cherry-pop.png',
+    'gummy-7': 'pineapple-paradise.png',
+    'gummy-8': 'pink-lemonade-drops.png',
+    'gummy-9': 'rainbow-daydream.png'
+  };
+
+  treats.forEach(product => {
+    const filename = gummyImages[product.id];
+
+    if (filename) {
+      product.image = 'images/' + filename;
+      product.imageAlt = product.name + ' gummy pouch';
+    }
+  });
+
+  render();
+  renderFeatured();
+})();
