@@ -1069,3 +1069,29 @@ if(!document.body.dataset.page&&$('#launchDialog')){
   render();
   renderFeatured();
 })();
+// CONNECT ALL 9 COOKIE WRAPPER PHOTOS
+(() => {
+  const cookieImages = {
+    'cookie': 'cookie-crush.png',
+    'cookie-1': 'brown-butter-bliss.png',
+    'cookie-2': 'double-cocoa-crush.png',
+    'cookie-3': 'white-chocolate-raspberry.png',
+    'cookie-4': 'pistachio-crumble.png',
+    'cookie-5': 'salted-caramel-cookie.png',
+    'cookie-6': 'birthday-confetti.png',
+    'cookie-7': 'cinnamon-sugar-hug.png',
+    'cookie-8': 'cookies-and-cream-dream.png'
+  };
+
+  treats.forEach(product => {
+    const filename = cookieImages[product.id];
+
+    if (filename) {
+      product.image = 'images/' + filename;
+      product.imageAlt = product.name + ' cookie wrapper';
+    }
+  });
+
+  render();
+  renderFeatured();
+})();
