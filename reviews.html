@@ -1,58 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#4b174b">
-<meta name="description" content="The Honey Fluff journal: sweet moments, community photos and a place for your honest feedback.">
-<title>Sweet Reviews — Honey Fluff Goods</title>
-<link rel="stylesheet" href="style.css">
-<script src="products.js" defer></script>
-<script src="script.js" defer></script>
-<style>
-/* All page styling is included here. No changes to style.css are needed. */
-body[data-page="reviews"]{margin:0;background:#faf7f0;color:#40183d;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
-.sr-page *, .sr-header *, .sr-footer *{box-sizing:border-box}
-.sr-page{--ink:#40183d;--muted:#746775;--rule:#ded3d8;--pink:#f0dce4;--paper:#faf7f0;max-width:1440px;margin:auto;padding:0 6vw}
-.sr-page a,.sr-header a,.sr-footer a{color:inherit;text-decoration:none}
-.sr-page h1,.sr-page h2,.sr-page h3,.sr-page p{margin:0}
-.sr-page h1,.sr-page h2,.sr-page h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em}
-.sr-page h1{font-size:clamp(60px,7.5vw,112px);line-height:.98;max-width:750px}
-.sr-page h2{font-size:clamp(38px,4.2vw,62px);line-height:1.06}
-.sr-page h3{font-size:29px;line-height:1.15}
-.sr-page em{font-weight:400;color:#965d7f}
-.sr-kicker{text-transform:uppercase;letter-spacing:.2em;font-size:10px;font-weight:700;line-height:1.7}
-.sr-copy{color:var(--muted);font-size:15px;line-height:1.8}
-.sr-header{max-width:1440px;margin:auto;padding:25px 6vw;display:flex;align-items:center;justify-content:space-between;gap:25px;border-bottom:1px solid #ded3d8;color:#40183d}
-.sr-brand{font-family:Georgia,serif;font-size:28px;letter-spacing:-1px;line-height:1}.sr-brand span{display:block;font:9px Arial,sans-serif;letter-spacing:.38em;margin-top:7px}
-.sr-header nav{display:flex;align-items:center;gap:25px;font-size:12px}.sr-header nav a{padding:9px 0}.sr-header nav a[aria-current]{border-bottom:1px solid currentColor}
-.sr-header nav .sr-nav-order{border:1px solid #40183d;border-radius:30px;padding:12px 18px}.sr-menu{display:none;background:none;border:1px solid #ded3d8;color:inherit;padding:10px 15px;border-radius:25px}
-.sr-topline{display:flex;justify-content:space-between;gap:20px;padding:25px 0;color:var(--muted);border-bottom:1px solid var(--rule);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.sr-hero{display:grid;grid-template-columns:1.4fr .6fr;gap:6vw;padding:72px 0 65px;align-items:end}.sr-hero .sr-kicker{margin-bottom:25px}.sr-hero-aside{padding:0 0 5px 24px;border-left:1px solid var(--rule)}.sr-hero-aside .sr-copy{margin:20px 0 25px}
-.sr-button{display:inline-flex;justify-content:center;align-items:center;gap:30px;min-height:49px;border:1px solid var(--ink);border-radius:40px;padding:14px 24px;font:12px Arial,sans-serif;cursor:pointer;background:var(--ink);color:white!important}.sr-button-light{color:var(--ink)!important;background:transparent}.sr-button:hover{background:#673361;color:white!important}
-.sr-gallery-head{border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:23px 0;gap:20px}.sr-gallery-head small{color:var(--muted);font-size:11px}
-.sr-gallery{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:20px;padding-bottom:65px}.sr-moment{margin:0!important;min-width:0}.sr-picture{position:relative;overflow:hidden;background:linear-gradient(140deg,#e8d7e4,#f0e5d9);height:330px;border-radius:4px}.sr-moment:first-child .sr-picture{height:420px}.sr-moment:nth-child(2){padding-top:50px}.sr-moment:nth-child(3){padding-top:100px}.sr-moment:nth-child(2) .sr-picture{background:linear-gradient(140deg,#e4e9d8,#f3e5d1)}.sr-moment:nth-child(3) .sr-picture{background:linear-gradient(140deg,#e4e2ee,#dce9ed)}
-.sr-picture img{display:block;width:100%;height:100%;object-fit:cover;position:relative;z-index:1;transition:transform .5s}.sr-picture:hover img{transform:scale(1.035)}
-.sr-art{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#744b6b}.sr-art b{font:italic 64px Georgia,serif;letter-spacing:-4px}.sr-art span{font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-top:20px}.sr-moment figcaption{padding:19px 0;border-bottom:1px solid var(--rule)}.sr-moment figcaption .sr-kicker{font-size:9px;color:var(--muted);margin-bottom:11px}.sr-moment figcaption p:last-child{margin-top:10px;font-size:12px;line-height:1.7;color:var(--muted)}
-.sr-stories{border-top:1px solid var(--rule);padding:48px 0 65px;display:grid;grid-template-columns:1fr 1fr;gap:8vw}.sr-stories .sr-kicker{margin-bottom:20px}.sr-empty{border:1px solid var(--rule);padding:35px;border-radius:4px;background:#f6f0ef}.sr-empty p{margin:16px 0 22px!important}.sr-textlink{font-size:12px;border-bottom:1px solid currentColor;padding-bottom:5px}
-.sr-form-section{background:#ecdde4;border-radius:5px;display:grid;grid-template-columns:1fr 1fr;gap:7vw;padding:55px;margin-bottom:65px}.sr-form-section .sr-copy{margin:23px 0}.sr-form-note{font-size:11px;line-height:1.7;color:var(--muted);max-width:330px}.sr-form{display:grid;gap:17px;min-width:0}.sr-field{display:grid;gap:8px}.sr-field label{font-size:11px;font-weight:700;letter-spacing:.04em}.sr-form input,.sr-form textarea{width:100%;border:1px solid #c6b1c0;border-radius:3px;background:#fcf9f5;color:var(--ink);font:14px Arial,sans-serif;padding:13px;box-sizing:border-box}.sr-form textarea{min-height:115px;resize:vertical}.sr-consent{display:flex;align-items:flex-start;gap:10px;font-size:11px;line-height:1.6}.sr-consent input{width:16px;height:16px;margin:1px 0;flex-shrink:0;accent-color:#4b174b}.sr-form .sr-button{justify-self:start}.sr-ready{font-size:12px;line-height:1.7;margin:0}.sr-ready[hidden]{display:none}
-.sr-end{display:flex;align-items:center;justify-content:space-between;gap:30px;border-top:1px solid var(--rule);padding:35px 0 50px}.sr-end p{font-size:14px;color:var(--muted);margin-top:10px}
-.sr-footer{border-top:1px solid #ded3d8;max-width:1440px;margin:auto;padding:32px 6vw 80px;display:flex;align-items:center;justify-content:space-between;gap:25px;font-size:11px;color:#746775}.sr-footer .sr-brand{color:#40183d;font-size:23px}.sr-footer small{font-size:10px;line-height:1.7}
-.sr-page :focus-visible,.sr-header :focus-visible,.sr-footer :focus-visible{outline:3px solid #a36b91;outline-offset:5px}
-@media(min-width:1600px){.sr-page,.sr-header,.sr-footer{padding-left:86px;padding-right:86px}}
-@media(max-width:960px){.sr-header nav{gap:15px}.sr-header nav a:nth-child(3),.sr-header nav a:nth-child(4){display:none}.sr-hero{grid-template-columns:1.2fr .8fr;gap:30px}.sr-picture{height:260px}.sr-moment:first-child .sr-picture{height:350px}.sr-form-section{padding:35px;gap:30px}}
-@media(max-width:680px){.sr-header{flex-wrap:wrap;padding-top:20px;padding-bottom:20px}.sr-menu{display:block}.sr-header nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:8px;padding-top:15px}.sr-header nav.open{display:flex}.sr-header nav a:nth-child(3),.sr-header nav a:nth-child(4){display:block}.sr-topline{font-size:8px}.sr-hero{grid-template-columns:1fr;padding:43px 0;gap:30px}.sr-hero-aside{padding-left:18px}.sr-gallery-head{align-items:flex-start;flex-direction:column;gap:7px}.sr-gallery{grid-template-columns:1fr;gap:28px;padding-bottom:40px}.sr-moment:nth-child(n){padding-top:0}.sr-moment:nth-child(n) .sr-picture{height:auto;aspect-ratio:4/3}.sr-stories{grid-template-columns:1fr;gap:28px;padding:35px 0}.sr-empty{padding:25px}.sr-form-section{grid-template-columns:1fr;padding:25px;margin-bottom:40px}.sr-end{align-items:flex-start;flex-direction:column}.sr-footer{align-items:flex-start;flex-direction:column}.sr-page h1{font-size:65px}}
-@media(prefers-reduced-motion:reduce){.sr-picture img{transition:none}.sr-picture:hover img{transform:none}}
-</style>
-</head>
-<body data-page="reviews">
-<a class="skip" href="#main">Skip to content</a>
-<header class="sr-header" id="header">
-<a class="sr-brand" href="index.html" aria-label="Honey Fluff Goods home">Honey Fluff<span>GOODS</span></a>
-<button id="menu" class="sr-menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button>
-<nav id="navigation" aria-label="Main navigation"><a href="index.html#collection">The collection</a><a href="reviews.html" aria-current="page">Sweet Reviews</a><a href="index.html#story">Our world</a><a href="index.html#questions">Good to know</a><a class="sr-nav-order" href="order.html">Order Online ↗</a><a href="order.html#basket">Bag (<span data-cart-count>0</span>)</a></nav>
-</header>
-<main id="main" class="sr-page">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#40183d"><meta name="description" content="Sweet moments, the Honey Fluff journal, and a place for your honest feedback."><meta property="og:type" content="website"><meta property="og:title" content="Sweet Reviews — Honey Fluff Goods"><meta property="og:description" content="Sweet moments, the Honey Fluff journal, and a place for your honest feedback."><meta property="og:image" content="https://ffcanoreply8-hash.github.io/HONEY-FLUFF-GOODS/images/social-preview.jpg"><meta name="twitter:card" content="summary_large_image"><title>Sweet Reviews — Honey Fluff Goods</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="products.js" defer></script><script src="script.js" defer></script></head><body data-page="reviews"><a class="skip" href="#main">Skip to content</a><div class="announcement">A LITTLE COLOUR. A LOT TO LOVE. <span>✦</span> CALGARY, ALBERTA</div><header id="header"><a class="wordmark" href="index.html" aria-label="Honey Fluff Goods home">Honey Fluff<span>G O O D S</span></a><button id="menu" aria-expanded="false" aria-controls="navigation" class="menu">Menu ☰</button><nav id="navigation" aria-label="Main navigation"><a href="index.html#collection">The collection</a><a href="reviews.html" aria-current="page">Sweet Reviews</a><a href="index.html#story">Our world</a><a href="index.html#questions">Good to know</a></nav><div class="header-actions"><a class="order-link" href="order.html">Order Online ↗</a><button class="bag-button" data-bag-open aria-label="Open shopping bag">Bag <span data-cart-count>0</span></button></div></header><main id="main"><div class="sr-page section">
 <div class="sr-topline"><span>The Honey Fluff journal</span><span>A little colour. A lot to love.</span></div>
 <section class="sr-hero" aria-labelledby="sr-title">
 <div><p class="sr-kicker">Sweet Reviews / Our community</p><h1>Good things.<br>Sweet <em>memories.</em></h1></div>
@@ -69,41 +15,6 @@ body[data-page="reviews"]{margin:0;background:#faf7f0;color:#40183d;font-family:
 <section class="sr-form-section" id="share-story" aria-labelledby="sr-share-title"><div><p class="sr-kicker">A note from you</p><h2 id="sr-share-title">Tell us about<br>your <em>sweet moment.</em></h2><p class="sr-copy">A favourite flavour, a thoughtful suggestion, or a moment worth remembering. We’d love to hear it.</p><p class="sr-form-note">This form prepares an email draft. Review and send it in your email app. You can attach a photo there if you have permission to share it.</p></div>
 <form id="srFeedback" class="sr-form"><div class="sr-field"><label for="srName">Your name</label><input id="srName" name="name" autocomplete="name" maxlength="100" required placeholder="What should we call you?"></div><div class="sr-field"><label for="srFlavour">Which treat did you try? (optional)</label><input id="srFlavour" name="flavour" maxlength="150" placeholder="Your Honey Fluff favourite"></div><div class="sr-field"><label for="srMessage">Your story</label><textarea id="srMessage" name="message" maxlength="3000" required placeholder="Tell us about your experience…"></textarea></div><label class="sr-consent"><input name="permission" type="checkbox"><span>You may feature my feedback and first name on the Honey Fluff website. (Optional)</span></label><button class="sr-button" type="submit">Prepare my email <span aria-hidden="true">↗</span></button><p class="sr-ready" id="srStatus" role="status"></p><a class="sr-button sr-button-light sr-ready" id="srEmail" hidden>Open email app ↗</a></form></section>
 <section class="sr-end"><div><p class="sr-kicker">Find your next favourite</p><h3>Something sweet is waiting.</h3><p>Explore a little more of the Honey Fluff world.</p></div><a class="sr-button sr-button-light" href="index.html#collection">Explore the collection ↗</a></section>
-</main>
-<footer class="sr-footer"><a class="sr-brand" href="index.html">Honey Fluff<span>GOODS</span></a><div><a href="mailto:sonnyzadeh219@gmail.com">sonnyzadeh219@gmail.com ↗</a><br><br><a href="tel:+14034665598">403-466-5598 ↗</a></div><small>© <span id="year"></span> Honey Fluff Goods<br>Collection preview · All prices CAD<br><a href="index.html#privacy">Privacy &amp; your information</a></small><a href="#header">Back to top ↑</a></footer>
-<div class="toast" id="toast" role="status"></div>
-<script>
-// Retains your existing review-1, review-2 and review-3 image names.
-document.querySelectorAll('[data-review-photo]').forEach(img => {
-  const extensions = ['png', 'jpg', 'webp', 'jpeg'];
-  let next = 1;
-  const retry = () => {
-    if (next < extensions.length) {
-      img.src = 'images/review-' + img.dataset.reviewPhoto + '.' + extensions[next++];
-    } else { img.hidden = true; img.style.display = 'none'; }
-  };
-  img.addEventListener('error', retry);
-  if (img.complete && img.naturalWidth === 0) retry();
-});
-const feedback = document.getElementById('srFeedback');
-const emailLink = document.getElementById('srEmail');
-const feedbackStatus = document.getElementById('srStatus');
-feedback.addEventListener('submit', event => {
-  event.preventDefault();
-  if (!feedback.reportValidity()) return;
-  const values = new FormData(feedback);
-  const body = [
-    'Hello Honey Fluff!', '',
-    'Name: ' + String(values.get('name')).trim(),
-    'Treat: ' + (String(values.get('flavour')).trim() || 'Not specified'), '',
-    String(values.get('message')).trim(), '',
-    values.get('permission') ? 'You may publish my feedback and first name on your website.' : 'Please keep my feedback private. I have not given permission to publish it.'
-  ].join('\n');
-  emailLink.href = 'mailto:sonnyzadeh219@gmail.com?subject=' + encodeURIComponent('My Honey Fluff feedback') + '&body=' + encodeURIComponent(body);
-  emailLink.hidden = false;
-  feedbackStatus.textContent = 'Your draft is ready. Open your email app below, then review and send it.';
-});
-feedback.addEventListener('input', () => { emailLink.hidden = true; feedbackStatus.textContent = ''; });
-</script>
-</body>
-</html>
+</div></main><section class="contact-band section"><div><p class="eyebrow">LET’S TALK SWEET THINGS</p><h2>Good things start<br>with a <em>hello.</em></h2></div><div><a href="mailto:sonnyzadeh219@gmail.com">sonnyzadeh219@gmail.com ↗</a><a href="tel:+14034665598">403-466-5598 ↗</a><button class="text-button" data-launch-open>Get launch updates ↗</button></div></section><footer><a class="wordmark" href="index.html" aria-label="Honey Fluff Goods home">Honey Fluff<span>G O O D S</span></a><p>A little colour.<br>A lot to love.</p><div><a href="index.html#collection">Explore the collection</a><a href="order.html">Order enquiries</a><a href="reviews.html">Sweet Reviews</a></div><small>© <span id="year"></span> Honey Fluff Goods<br>Collection preview · CAD<br><a href="index.html#privacy">Privacy &amp; your information</a></small></footer><dialog id="productDialog" class="product-dialog" aria-labelledby="dialogTitle"><button class="dialog-close" data-close="productDialog" aria-label="Close product details">×</button><div class="product-detail-grid"><div class="detail-visual"><div id="dialogArt" class="detail-image"></div><div id="galleryControls" class="gallery-controls"></div><p class="image-caption">Packaging concept · Image for illustration</p></div><div class="dialog-copy"><p class="eyebrow" id="dialogCategory"></p><h2 id="dialogTitle"></h2><p id="dialogDescription"></p><p class="detail-price" id="dialogPrice"></p><p class="pack-size" id="dialogSize"></p><div class="detail-purchase"><label class="qty-label" for="dialogQty">Quantity <input id="dialogQty" type="number" value="1" min="1" max="99" inputmode="numeric"></label><button id="dialogAdd" class="button">Add to bag +</button><button id="dialogSave" class="save-detail" aria-pressed="false" aria-label="Save product">♡</button></div><details open><summary>Flavour notes</summary><p id="dialogNotes"></p></details><details><summary>Storage &amp; care</summary><p id="dialogStorage"></p></details><details><summary>Ingredients &amp; allergens</summary><p>Final recipes and verified ingredient and allergen information are not yet available. Please ask us for confirmed details before ordering.</p></details><p class="small-note">Launch menu preview. Pack sizes, prices and availability require confirmation. Packaging artwork may show an earlier proposed size.</p></div></div><div class="detail-related"><p class="eyebrow">A LITTLE SOMETHING ELSE</p><h3>You might also like</h3><div id="relatedProducts" class="related-grid"></div></div></dialog>
+<dialog id="bagDialog" class="bag-drawer" aria-labelledby="bagTitle"><button class="dialog-close" data-close="bagDialog" aria-label="Close shopping bag">×</button><p class="eyebrow">YOUR SWEET SHORTLIST</p><h2 id="bagTitle">A bag of <em>happy.</em></h2><div id="drawerItems" class="bag-lines"></div><div class="drawer-bottom"><div class="basket-total"><span>Product subtotal</span><strong data-subtotal>$0.00</strong></div><p class="small-note">CAD estimate. Taxes and delivery confirmed separately. Nothing is charged or reserved.</p><a class="button" href="order.html#basket" id="drawerContinue">Review your enquiry ↗</a><button class="text-button" data-close="bagDialog">Keep exploring</button></div></dialog>
+<dialog id="launchDialog" class="launch-dialog" aria-labelledby="launchTitle"><button class="dialog-close" data-close="launchDialog" aria-label="Close launch updates">×</button><div class="launch-mark" aria-hidden="true">✳</div><p class="eyebrow">LET’S STAY IN THE LOOP</p><h2 id="launchTitle">A little more<br><em>to look forward to.</em></h2><p>Opening news. New flavours. A note when something sweet is ready.</p><form id="launchForm"><label for="launchEmail">Your email address</label><input id="launchEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required><label class="check-label"><input name="consent" type="checkbox" required><span>I’d like launch updates by email. I can ask to stop at any time.</span></label><button class="button" type="submit">Prepare my request ↗</button></form><p class="small-note">Prepares an email draft for you to send. Updates start after we receive and confirm your request.</p><p id="launchStatus" role="status"></p><a id="launchEmailLink" class="outline-button" hidden>Open email app ↗</a></dialog><div id="toast" class="toast" role="status"></div></body></html>
