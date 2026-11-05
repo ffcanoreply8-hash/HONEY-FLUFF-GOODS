@@ -2,6 +2,28 @@
 (() => {
 const config = {email:'sonnyzadeh219@gmail.com',featured:['cloud','cookie','cookie-4','brownie-2']};
 const treats = Array.isArray(window.HF_PRODUCTS) ? window.HF_PRODUCTS : [];
+const chocolateWrapperImages = {
+  milk: 'golden-hour.png',
+  rose: 'rose-tinted.png',
+  'chocolate-1': 'midnight-truffle.png',
+  'chocolate-2': 'pistachio-silk.png',
+  'chocolate-3': 'caramel-gleam.png',
+  'chocolate-4': 'hazelnut-halo.png',
+  'chocolate-5': 'orange-afterglow.png',
+  'chocolate-6': 'coconut-kiss.png',
+  'chocolate-7': 'raspberry-romance.png'
+};
+
+for (const treat of treats) {
+  if (treat.category !== 'chocolate') continue;
+
+  const filename = chocolateWrapperImages[treat.id];
+  if (filename) {
+    treat.image = 'images/' + filename;
+    treat.imageAlt = treat.name + ' chocolate wrapper';
+  }
+}
+
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
