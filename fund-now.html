@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#40183d">
+<title>Fund Now | Honey Fluff Goods</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+.fund-page {background:#f8f5ee;color:#40183d;margin:0;min-height:100vh}
+.fund-top,.fund-main {width:min(1080px,calc(100% - 40px));margin:auto}
+.fund-top {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;border-bottom:1px solid #ded1db}
+.fund-top a {color:inherit;text-decoration:underline;text-underline-offset:4px}
+.fund-top .wordmark {text-decoration:none}
+.fund-main {display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,6vw,82px);align-items:start;padding:clamp(32px,7vw,86px) 0}
+.fund-main h1 {font-size:clamp(45px,7vw,78px);line-height:1;margin:18px 0 24px}
+.fund-main h2 {font-size:clamp(25px,4vw,35px);line-height:1.15;margin:0 0 12px}
+.fund-main p,.fund-main li {line-height:1.65}
+.fund-info h2 {margin-top:32px}
+.fund-info ul {padding-left:22px;margin:0}
+.fund-form {background:#f0e4e8;border:1px solid #dfd0db;border-radius:22px;padding:clamp(18px,4vw,34px)}
+.fund-form fieldset {padding:0;border:0;margin:22px 0 12px;min-width:0}
+.fund-form legend,.fund-form label {font-weight:700}
+.fund-options {display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.fund-options label {display:flex;align-items:center;gap:6px;border:1px solid #805378;padding:8px 11px;border-radius:999px;cursor:pointer}
+.fund-options label:has(:checked) {background:#40183d;color:#fff}
+.fund-options input {accent-color:#925f7c;margin:0}
+.fund-field {display:block;margin:15px 0}
+.fund-field input,.fund-field select,.fund-field textarea,.fund-draft {display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:10px 12px;border:1px solid #987b94;border-radius:8px;background:#fffdf9;color:#40183d;font:inherit;font-weight:400}
+.fund-field textarea,.fund-draft {resize:vertical}
+.fund-main :focus-visible {outline:3px solid #925f7c;outline-offset:3px}
+.fund-submit {display:block;width:100%;border:0;border-radius:999px;background:#40183d;color:#fff;font:inherit;font-weight:700;padding:14px 18px;cursor:pointer;text-align:center}
+.fund-submit:hover {background:#5c2958}
+.fund-small {font-size:.9em;margin:10px 0 0}
+.fund-result {margin-top:20px}
+.fund-result a {margin-top:12px;text-decoration:none}
+.fund-result h2 {font-size:24px}
+@media(max-width:740px){.fund-main{grid-template-columns:1fr}.fund-top .wordmark{font-size:22px}}
+</style>
+</head>
+<body class="fund-page">
+<header class="fund-top">
+  <a class="wordmark" href="index.html" aria-label="Honey Fluff Goods home">Honey Fluff<span>G O O D S</span></a>
+  <a href="read-now.html">Back to our launch</a>
+</header>
+<main class="fund-main">
+  <section class="fund-info" aria-labelledby="fund-title">
+    <p class="eyebrow">HONEY FLUFF GOODS · PRE-LAUNCH</p>
+    <h1 id="fund-title">Fund <em>Now.</em></h1>
+    <p>Help bring Honey Fluff Goods from a collection preview to launch. Tell us how much you’re interested in contributing and what you’d like to discuss.</p>
+    <h2>What funding could support</h2>
+    <ul>
+      <li>Recipe development, testing and ingredients for initial batches.</li>
+      <li>Packaging and production setup.</li>
+      <li>Workplace training and support as the team grows.</li>
+    </ul>
+    <h2>What happens next</h2>
+    <p>Choose an amount in Canadian dollars and prepare an email enquiry. You can review the draft before sending it. We can then talk about your questions and possible next steps.</p>
+    <p>Sending an enquiry does not collect payment or commit you to funding.</p>
+  </section>
+  <form class="fund-form" id="fund-form">
+    <h2>Your funding enquiry</h2>
+    <p>Fields marked with an asterisk are required.</p>
+    <fieldset>
+      <legend>Amount you’re considering (CAD)</legend>
+      <div class="fund-options">
+        <label><input type="radio" name="preset" value="25" checked> $25</label>
+        <label><input type="radio" name="preset" value="50"> $50</label>
+        <label><input type="radio" name="preset" value="100"> $100</label>
+        <label><input type="radio" name="preset" value="250"> $250</label>
+        <label><input type="radio" name="preset" value="custom"> Custom</label>
+      </div>
+    </fieldset>
+    <div id="custom-field" hidden>
+      <label class="fund-field" for="custom-amount">Custom amount (CAD) *
+        <input id="custom-amount" name="customAmount" type="number" min="0.01" step="0.01" inputmode="decimal" disabled>
+      </label>
+    </div>
+    <label class="fund-field">Full name * <input name="fullName" autocomplete="name" required maxlength="100"></label>
+    <label class="fund-field">Email * <input name="email" type="email" autocomplete="email" required maxlength="150"></label>
+    <label class="fund-field">Organization (optional) <input name="organization" autocomplete="organization" maxlength="120"></label>
+    <label class="fund-field">What would you like to discuss?
+      <select name="topic">
+        <option>Supporting the launch</option>
+        <option>Potential investment</option>
+        <option>Business or community partnership</option>
+        <option>Something else</option>
+      </select>
+    </label>
+    <label class="fund-field">Questions or details (optional) <textarea name="message" rows="4" maxlength="700" placeholder="Tell us what you’d like to know or how you’d like to help."></textarea></label>
+    <button class="fund-submit" type="submit">Prepare funding email</button>
+    <p class="fund-small">Only share the contact details you want to include in your email.</p>
+    <section class="fund-result" id="fund-result" hidden aria-labelledby="draft-title">
+      <h2 id="draft-title" tabindex="-1">Review your email draft</h2>
+      <textarea id="fund-draft" class="fund-draft" aria-label="Funding email draft" rows="8" readonly></textarea>
+      <a class="fund-submit" id="fund-email" href="mailto:sonnyzadeh219@gmail.com">Open in your email app ↗</a>
+      <p class="fund-small">You can also copy the draft and send it to sonnyzadeh219@gmail.com.</p>
+    </section>
+    <noscript><p>Email your proposed amount and questions to <a href="mailto:sonnyzadeh219@gmail.com">sonnyzadeh219@gmail.com</a>.</p></noscript>
+  </form>
+</main>
+<script>
+const form = document.getElementById('fund-form');
+const customField = document.getElementById('custom-field');
+const customAmount = document.getElementById('custom-amount');
+const result = document.getElementById('fund-result');
+const currency = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
+
+function updateAmountField() {
+  const isCustom = form.elements.preset.value === 'custom';
+  customField.hidden = !isCustom;
+  customAmount.disabled = !isCustom;
+  customAmount.required = isCustom;
+}
+
+form.addEventListener('input', () => {
+  updateAmountField();
+  result.hidden = true;
+});
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!form.reportValidity()) return;
+
+  const data = new FormData(form);
+  const name = data.get('fullName').trim();
+  const amount = Number(data.get('preset') === 'custom' ? data.get('customAmount') : data.get('preset'));
+  const organization = data.get('organization').trim();
+  const message = data.get('message').trim();
+  const lines = [
+    'Hello Honey Fluff Goods,',
+    '',
+    'I’d like to discuss possible funding for your launch.',
+    '',
+    'Amount I’m considering: ' + currency.format(amount) + ' CAD',
+    'Name: ' + name,
+    'Email: ' + data.get('email'),
+    'Topic: ' + data.get('topic')
+  ];
+  if (organization) lines.push('Organization: ' + organization);
+  if (message) lines.push('', 'Questions or details:', message);
+  const draft = lines.join('\n');
+  document.getElementById('fund-draft').value = draft;
+  document.getElementById('fund-email').href = 'mailto:sonnyzadeh219@gmail.com?subject=' +
+    encodeURIComponent('Honey Fluff Goods funding enquiry') + '&body=' + encodeURIComponent(draft);
+  result.hidden = false;
+  document.getElementById('draft-title').focus();
+});
+
+updateAmountField();
+</script>
+</body>
+</html>
