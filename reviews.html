@@ -9,6 +9,56 @@ header .read-now-link:focus-visible{outline:3px solid #8f567e;outline-offset:4px
 .funding-page{max-width:1300px}.funding-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:7vw;align-items:start;padding-top:70px;padding-bottom:70px}.funding-hero h1{font-size:clamp(48px,6vw,82px)}.funding-status{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid #d5a85b;border-radius:30px;background:#f7e8c9;font-size:10px;margin-bottom:25px;letter-spacing:.06em}.funding-status:before{content:'';width:7px;height:7px;background:#925f7c;border-radius:50%}.funding-message{margin-top:28px;color:var(--muted);font-size:14px;line-height:1.9;max-width:600px}.funding-message p+p{margin-top:18px}.funding-contact{padding:35px;border:1px solid var(--line);background:#f0e4e8;border-radius:6px;margin-top:25px}.funding-contact h2{font-size:36px}.funding-contact>p:not(.eyebrow){font-size:12px;color:var(--muted);margin:18px 0 25px}.funding-contact .button{width:100%;margin-top:12px}.funding-contact .email-address{font-size:12px;overflow-wrap:anywhere;display:block;margin-top:20px;text-align:center}.funding-note{padding:28px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:35px}.funding-note p{font-size:12px;color:var(--muted)}.funding-note h3{margin-bottom:12px}.funding-end{margin-top:35px;display:flex;gap:25px;align-items:center;flex-wrap:wrap}
 @media(max-width:760px){.funding-hero{grid-template-columns:1fr;gap:25px;padding-top:40px;padding-bottom:40px}.funding-contact{margin-top:0;padding:25px}.funding-hero h1{font-size:54px}.funding-note{grid-template-columns:1fr;gap:20px}}
 @media(prefers-reduced-motion:reduce){header .read-now-link{transition:none}header .read-now-link:hover{transform:none}}
+
+/* Sweet Reviews grid and review text boxes */
+.sr-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding-bottom: 56px;
+}
+.sr-review-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+}
+.sr-review-card .sr-picture {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+}
+.sr-review-card .sr-picture img[hidden] { display: none; }
+.sr-review-card .sr-art b {
+  font-size: clamp(26px, 3vw, 45px);
+  letter-spacing: -.035em;
+}
+.sr-review-box {
+  flex: 1;
+  min-height: 110px;
+  margin-top: 10px;
+  padding: 15px 17px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fcf8f5;
+}
+.sr-review-box .sr-kicker { color: #744b6b; }
+.sr-review-box .sr-review-text {
+  margin-top: 7px;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.sr-review-box .sr-review-text:empty::before {
+  content: "Review coming soon.";
+  color: var(--muted);
+}
+@media (max-width: 850px) {
+  .sr-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sr-review-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-bottom: 38px; }
+}
 </style></head><body data-page="reviews"><a class="skip" href="#main">Skip to content</a><div class="announcement">A LITTLE COLOUR. A LOT TO LOVE. <span>✦</span> CALGARY, ALBERTA</div><header id="header"><a class="wordmark" href="index.html" aria-label="Honey Fluff Goods home">Honey Fluff<span>G O O D S</span></a><button id="menu" aria-expanded="false" aria-controls="navigation" class="menu">Menu ☰</button><nav id="navigation" aria-label="Main navigation"><a href="index.html#collection">The collection</a><a href="reviews.html" aria-current="page">Sweet Reviews</a><a href="index.html#story">Our world</a><a href="index.html#questions">Good to know</a></nav><div class="header-actions"><a class="read-now-link" href="read-now.html">READ NOW!</a><a class="order-link" href="order.html">Order Online ↗</a><button class="bag-button" data-bag-open aria-label="Open shopping bag">Bag <span data-cart-count>0</span></button></div></header><main id="main"><div class="sr-page section">
 <div class="sr-topline"><span>The Honey Fluff journal</span><span>A little colour. A lot to love.</span></div>
 <section class="sr-hero" aria-labelledby="sr-title">
@@ -17,12 +67,105 @@ header .read-now-link:focus-visible{outline:3px solid #8f567e;outline-offset:4px
 </section>
 <section aria-labelledby="sr-gallery-title">
 <div class="sr-gallery-head"><h2 id="sr-gallery-title" style="font:12px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase">Life, with a little fluff.</h2><small>From the brand journal · promotional imagery</small></div>
-<div class="sr-gallery">
-<figure class="sr-moment"><div class="sr-picture"><div class="sr-art"><b>First taste.</b><span>The Honey Fluff journal</span></div><img src="images/review-1.png" alt="Honey Fluff promotional photograph, first taste" data-review-photo="1"></div><figcaption><p class="sr-kicker">01 / The first impression</p><h3>A little sweet escape.</h3><p>For slow afternoons and something lovely to look forward to.</p></figcaption></figure>
-<figure class="sr-moment"><div class="sr-picture"><div class="sr-art"><b>Little joys.</b><span>The Honey Fluff journal</span></div><img src="images/review-2.png" alt="Honey Fluff promotional photograph, little celebrations" data-review-photo="2" loading="lazy"></div><figcaption><p class="sr-kicker">02 / Everyday occasions</p><h3>Make a moment of it.</h3><p>Because a celebration doesn’t always need a reason.</p></figcaption></figure>
-<figure class="sr-moment"><div class="sr-picture"><div class="sr-art"><b>Better together.</b><span>The Honey Fluff journal</span></div><img src="images/review-3.png" alt="Honey Fluff promotional photograph, shared sweetness" data-review-photo="3" loading="lazy"></div><figcaption><p class="sr-kicker">03 / Shared sweetness</p><h3>Pass the good things.</h3><p>A treat for you. A little happiness to share.</p></figcaption></figure>
+<div class="sr-review-grid">
+<figure class="sr-review-card" id="review-01">
+  <div class="sr-picture">
+    <div class="sr-art"><b>First taste.</b><span>The Honey Fluff journal</span></div><img src="images/review-1.png" alt="Honey Fluff promotional photograph, first taste" data-review-photo="1">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 01</p>
+    <!-- REVIEW 01: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-02">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Little joys.</b><span>The Honey Fluff journal</span></div><img src="images/review-2.png" alt="Honey Fluff promotional photograph, little celebrations" data-review-photo="2" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 02</p>
+    <!-- REVIEW 02: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-03">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Better together.</b><span>The Honey Fluff journal</span></div><img src="images/review-3.png" alt="Honey Fluff promotional photograph, shared sweetness" data-review-photo="3" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 03</p>
+    <!-- REVIEW 03: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-04">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 04</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-4.png" alt="Honey Fluff journal photo 4" data-review-photo="4" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 04</p>
+    <!-- REVIEW 04: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-05">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 05</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-5.png" alt="Honey Fluff journal photo 5" data-review-photo="5" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 05</p>
+    <!-- REVIEW 05: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-06">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 06</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-6.png" alt="Honey Fluff journal photo 6" data-review-photo="6" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 06</p>
+    <!-- REVIEW 06: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-07">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 07</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-7.png" alt="Honey Fluff journal photo 7" data-review-photo="7" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 07</p>
+    <!-- REVIEW 07: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-08">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 08</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-8.png" alt="Honey Fluff journal photo 8" data-review-photo="8" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 08</p>
+    <!-- REVIEW 08: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
+<figure class="sr-review-card" id="review-09">
+  <div class="sr-picture">
+    <div class="sr-art"><b>Photo 09</b><span>The Honey Fluff journal</span></div>
+    <img src="images/review-9.png" alt="Honey Fluff journal photo 9" data-review-photo="9" loading="lazy">
+  </div>
+  <figcaption class="sr-review-box">
+    <p class="sr-kicker">Review 09</p>
+    <!-- REVIEW 09: Type your approved review between the opening and closing p tags below. -->
+    <p class="sr-review-text"></p>
+  </figcaption>
+</figure>
 </div></section>
-<section class="sr-stories" aria-labelledby="sr-stories-title"><div><p class="sr-kicker">The honest words</p><h2 id="sr-stories-title">Your experience.<br>In <em>your words.</em></h2></div><div class="sr-empty"><p class="sr-kicker">Our story is just beginning</p><h3>The first review could be yours.</h3><p class="sr-copy">We haven’t published customer reviews yet. As our community grows, we’ll feature real experiences here, with permission.</p><a class="sr-textlink" href="#share-story">Tell us what you think ↗</a></div></section>
+<section class="sr-stories" aria-labelledby="sr-stories-title"><div><p class="sr-kicker">The honest words</p><h2 id="sr-stories-title">Your experience.<br>In <em>your words.</em></h2></div><div class="sr-empty"><p class="sr-kicker">Our story is just beginning</p><h3>Your story belongs here.</h3><p class="sr-copy">Tell us what you tried and what made it memorable. We feature customer experiences with permission.</p><a class="sr-textlink" href="#share-story">Tell us what you think ↗</a></div></section>
 <section class="sr-form-section" id="share-story" aria-labelledby="sr-share-title"><div><p class="sr-kicker">A note from you</p><h2 id="sr-share-title">Tell us about<br>your <em>sweet moment.</em></h2><p class="sr-copy">A favourite flavour, a thoughtful suggestion, or a moment worth remembering. We’d love to hear it.</p><p class="sr-form-note">This form prepares an email draft. Review and send it in your email app. You can attach a photo there if you have permission to share it.</p></div>
 <form id="srFeedback" class="sr-form"><div class="sr-field"><label for="srName">Your name</label><input id="srName" name="name" autocomplete="name" maxlength="100" required placeholder="What should we call you?"></div><div class="sr-field"><label for="srFlavour">Which treat did you try? (optional)</label><input id="srFlavour" name="flavour" maxlength="150" placeholder="Your Honey Fluff favourite"></div><div class="sr-field"><label for="srMessage">Your story</label><textarea id="srMessage" name="message" maxlength="3000" required placeholder="Tell us about your experience…"></textarea></div><label class="sr-consent"><input name="permission" type="checkbox"><span>You may feature my feedback and first name on the Honey Fluff website. (Optional)</span></label><button class="sr-button" type="submit">Prepare my email <span aria-hidden="true">↗</span></button><p class="sr-ready" id="srStatus" role="status"></p><a class="sr-button sr-button-light sr-ready" id="srEmail" hidden>Open email app ↗</a></form></section>
 <section class="sr-end"><div><p class="sr-kicker">Find your next favourite</p><h3>Something sweet is waiting.</h3><p>Explore a little more of the Honey Fluff world.</p></div><a class="sr-button sr-button-light" href="index.html#collection">Explore the collection ↗</a></section>
