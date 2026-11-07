@@ -25,9 +25,15 @@ header .read-now-link:focus-visible{outline:3px solid #8f567e;outline-offset:4px
 }
 .sr-review-card .sr-picture {
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   border-radius: 8px;
 }
+.sr-review-card .sr-picture img {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+}
+.sr-review-card .sr-picture:hover img { transform: none; }
 .sr-review-card .sr-picture img[hidden] { display: none; }
 .sr-review-card .sr-art b {
   font-size: clamp(26px, 3vw, 45px);
