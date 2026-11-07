@@ -741,8 +741,8 @@ window.HF_PRODUCTS = [
     "size": "355 mL can",
     "price": 495,
     "storage": "Serve chilled. Follow the final package label for storage after opening.",
-    "image": "",
-    "imageAlt": ""
+    "image": "images/pink-lemonade-spark.png",
+    "imageAlt": "Pink Lemonade Spark packaging"
   },
   {
     "id": "drink-6",
