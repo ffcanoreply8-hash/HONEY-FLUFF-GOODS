@@ -42,3 +42,12 @@ img{height:auto}.hero-visual>img{height:auto;aspect-ratio:1.25;object-fit:cover}
 @media(max-width:760px){.hero-visual>img{aspect-ratio:1.35}.related-product img{height:55px}}
 
 html{scroll-behavior:auto}
+
+
+/* The desktop order button moves into the menu on narrow screens. */
+.mobile-order-link { display: none; }
+@media (max-width: 760px) {
+  .mobile-order-link { display: block; }
+  .checkout-grid > * { min-width: 0; }
+}
+.sr-draft textarea { display: block; margin-bottom: 12px; }
