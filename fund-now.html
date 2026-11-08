@@ -114,7 +114,8 @@ function updateAmountField() {
   customAmount.required = isCustom;
 }
 
-form.addEventListener('input', () => {
+form.addEventListener('input', event => {
+  event.target.setCustomValidity?.('');
   updateAmountField();
   result.hidden = true;
 });
@@ -125,6 +126,12 @@ form.addEventListener('submit', event => {
 
   const data = new FormData(form);
   const name = data.get('fullName').trim();
+  if (!name) {
+    const nameField = form.elements.fullName;
+    nameField.setCustomValidity('Enter your full name.');
+    nameField.reportValidity();
+    return;
+  }
   const amount = Number(data.get('preset') === 'custom' ? data.get('customAmount') : data.get('preset'));
   const organization = data.get('organization').trim();
   const message = data.get('message').trim();
