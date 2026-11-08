@@ -51,3 +51,24 @@ html{scroll-behavior:auto}
   .checkout-grid > * { min-width: 0; }
 }
 .sr-draft textarea { display: block; margin-bottom: 12px; }
+
+.site-sound {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.site-sound:hover,
+.site-sound[aria-pressed="true"] { background: var(--blush); }
+@media (max-width: 760px) {
+  .header-actions:has(.site-sound) { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .fund-top:has(.site-sound) { flex-wrap: wrap; }
+}
