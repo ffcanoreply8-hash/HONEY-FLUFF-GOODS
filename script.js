@@ -1,5 +1,133 @@
 'use strict';
 (() => {
+// Shared audio for the storefront and funding page.
+function setupSound() {
+  const host = document.querySelector('.header-actions, .fund-top');
+  if (!host) return () => {};
+
+  const key = 'honeyfluff-sound-v1';
+  function readPreference() {
+    try { return localStorage.getItem(key) === 'on'; }
+    catch { return false; }
+  }
+
+  let enabled = readPreference();
+  let music;
+  let context;
+  let effectsResume;
+  let waitingForGesture = true;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'site-sound';
+  button.setAttribute('aria-label', 'Website sound');
+  host.append(button);
+
+  function updateButton() {
+    button.setAttribute('aria-pressed', String(enabled));
+    button.textContent = enabled ? '♫ Sound on' : '♫ Sound off';
+  }
+
+  async function startMusic() {
+    if (!enabled || document.hidden) return;
+    if (!music) {
+      music = new Audio('audio/honey-fluff-loop.mp3');
+      music.loop = true;
+    }
+    waitingForGesture = false;
+    try {
+      await music.play();
+    } catch (error) {
+      waitingForGesture = error.name === 'NotAllowedError';
+    }
+  }
+
+  const AudioEngine = window.AudioContext || window.webkitAudioContext;
+  function unlockEffects() {
+    if (!AudioEngine) return;
+    try {
+      context ??= new AudioEngine();
+      if (context.state !== 'running' && !effectsResume) {
+        effectsResume = context.resume().catch(() => {}).finally(() => { effectsResume = undefined; });
+      }
+      return effectsResume;
+    } catch { /* The music can still play without Web Audio. */ }
+  }
+
+  button.addEventListener('click', () => {
+    enabled = !enabled;
+    try { localStorage.setItem(key, enabled ? 'on' : 'off'); }
+    catch { /* Keep the choice for this page. */ }
+    updateButton();
+    if (enabled) {
+      unlockEffects();
+      startMusic();
+    } else {
+      music?.pause();
+    }
+  });
+
+  // Some browsers require a new gesture when opening the next page.
+  document.addEventListener('click', event => {
+    if (!enabled || !event.isTrusted || event.target.closest('.site-sound')) return;
+    unlockEffects();
+    if (waitingForGesture) startMusic();
+  }, true);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) music?.pause();
+    else if (!waitingForGesture) startMusic();
+  });
+  window.addEventListener('pagehide', () => music?.pause());
+  function restorePreference() {
+    try { enabled = localStorage.getItem(key) === 'on'; }
+    catch { /* Keep the current page choice when storage is blocked. */ }
+    updateButton();
+    if (enabled) startMusic();
+    else music?.pause();
+  }
+
+  window.addEventListener('pageshow', event => {
+    if (event.persisted) restorePreference();
+    else startMusic();
+  });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) restorePreference();
+  });
+
+  updateButton();
+
+  const effects = {
+    product: [[475, 0, 0.085, 0.05]],
+    category: [[640, 0, 0.045, 0.027]],
+    bag: [[659.25, 0, 0.105, 0.045], [880, 0.065, 0.14, 0.038]]
+  };
+  return async name => {
+    if (!enabled || document.hidden || !context) return;
+    if (effectsResume) await effectsResume;
+    if (!enabled || document.hidden || context.state !== 'running') return;
+    const now = context.currentTime;
+    for (const [frequency, delay, duration, volume] of effects[name]) {
+      const tone = context.createOscillator();
+      const envelope = context.createGain();
+      const start = now + delay;
+      const end = start + duration;
+      tone.frequency.value = frequency;
+      envelope.gain.setValueAtTime(0.0001, start);
+      envelope.gain.exponentialRampToValueAtTime(volume, start + 0.008);
+      envelope.gain.exponentialRampToValueAtTime(0.0001, end);
+      tone.connect(envelope);
+      envelope.connect(context.destination);
+      tone.onended = () => {
+        tone.disconnect();
+        envelope.disconnect();
+      };
+      tone.start(start);
+      tone.stop(end);
+    }
+  };
+}
+const playSound = setupSound();
+if (document.body.classList.contains('fund-page')) return;
+
 const config = {email:'sonnyzadeh219@gmail.com',featured:['cloud','cookie','cookie-4','brownie-2']};
 const treats = Array.isArray(window.HF_PRODUCTS) ? window.HF_PRODUCTS : [];
 const chocolateWrapperImages = {
@@ -63,8 +191,8 @@ function invalidateDraft(){if($('#emailFallback'))$('#emailFallback').hidden=tru
 function line(t,n){return `<article class="cart-item">${imagePath(t)?`<img src="${esc(imagePath(t))}" alt="${esc(t.name)}" data-product-image>`:'<span aria-hidden="true">✧</span>'}<div><div class="cart-item-top"><h3>${esc(t.name)}</h3><strong>${money(t.price*n)}</strong></div><small>${money(t.price)} each</small><div class="quantity-controls"><button data-quantity="${esc(t.id)}" data-delta="-1" aria-label="Remove one ${esc(t.name)}">−</button><span aria-label="Quantity">${n}</span><button data-quantity="${esc(t.id)}" data-delta="1" aria-label="Add one ${esc(t.name)}" ${n===99?'disabled':''}>+</button><button class="remove-item" data-remove="${esc(t.id)}" aria-label="Remove ${esc(t.name)} from bag">Remove</button></div></div></article>`;}
 function renderBag(){const rows=Object.entries(bag),qty=rows.reduce((n,[id,q])=>n+q,0);$$('[data-cart-count]').forEach(el=>el.textContent=qty);const content=qty?rows.map(([id,n])=>line(get(id),n)).join(''):'<p class="empty-bag">Your bag is waiting for a little wonder.<br>Explore the collection and add something lovely.</p>';['#cartItems','#drawerItems'].forEach(sel=>{if($(sel))$(sel).innerHTML=content;});$$('[data-subtotal]').forEach(el=>el.textContent=money(subtotal()));if($('#checkoutButton'))$('#checkoutButton').disabled=!qty;if($('#clearCart'))$('#clearCart').hidden=!qty;if($('#drawerContinue')){$('#drawerContinue').textContent=qty?'Review your enquiry ↗':'Explore the collection ↗';$('#drawerContinue').href=qty?'order.html#basket':'order.html#shop';}if($('#checkoutSummary'))$('#checkoutSummary').innerHTML=rows.map(([id,n])=>`<div class="summary-line"><span>${n} × ${esc(get(id).name)}<small>${esc(get(id).size)}</small></span><strong>${money(get(id).price*n)}</strong></div>`).join('')+`<div class="summary-line"><strong>Product subtotal (CAD)</strong><strong>${money(subtotal())}</strong></div><p class="small-note">Estimate only. Taxes and delivery confirmed separately.</p>`;if(!qty&&$('#checkout'))$('#checkout').hidden=true;invalidateDraft();}
 function saveBag(){write(bagKey,bag);renderBag();}
-function add(id,n=1){if(!valid.has(id))return;const old=bag[id]||0;if(old>=99){toast('Maximum 99 per flavour.');return;}bag[id]=Math.min(99,old+n);saveBag();toast(`${get(id).name} added · ${bag[id]} in your bag`);}
-function openProduct(id){const t=get(id);if(!t)return;current=t;$('#dialogTitle').textContent=t.name;$('#dialogCategory').textContent=t.category;$('#dialogDescription').textContent=t.description;$('#dialogNotes').textContent=t.line+' '+t.description;$('#dialogPrice').textContent=money(t.price)+' CAD';$('#dialogSize').textContent=t.size.replace(' · proposed',' ·');$('#dialogStorage').textContent=t.storage;$('#dialogArt').classList.remove('zoomed');$('#dialogArt').innerHTML=visual(t,false);$('#dialogQty').value=1;$('#galleryControls').innerHTML='<button data-gallery="full" aria-pressed="true">Full packaging</button><button data-gallery="detail" aria-pressed="false">Close-up</button>';const related=treats.filter(x=>x.category===t.category&&x.id!==t.id).slice(0,3);$('#relatedProducts').innerHTML=related.map(x=>`<button class="related-product" data-open="${esc(x.id)}">${imagePath(x)?`<img src="${esc(imagePath(x))}" alt="" loading="lazy" data-product-image>`:'<span aria-hidden="true">✧</span>'}<span>${esc(x.name)}<small>${money(x.price)}</small></span></button>`).join('');updateSaved();if(!$('#productDialog').open)showDialog('productDialog');else $('#productDialog').scrollTop=0;}
+function add(id,n=1){if(!valid.has(id))return;const old=bag[id]||0;if(old>=99){toast('Maximum 99 per flavour.');return;}bag[id]=Math.min(99,old+n);saveBag();playSound('bag');toast(`${get(id).name} added · ${bag[id]} in your bag`);}
+function openProduct(id){const t=get(id);if(!t)return;playSound('product');current=t;$('#dialogTitle').textContent=t.name;$('#dialogCategory').textContent=t.category;$('#dialogDescription').textContent=t.description;$('#dialogNotes').textContent=t.line+' '+t.description;$('#dialogPrice').textContent=money(t.price)+' CAD';$('#dialogSize').textContent=t.size.replace(' · proposed',' ·');$('#dialogStorage').textContent=t.storage;$('#dialogArt').classList.remove('zoomed');$('#dialogArt').innerHTML=visual(t,false);$('#dialogQty').value=1;$('#galleryControls').innerHTML='<button data-gallery="full" aria-pressed="true">Full packaging</button><button data-gallery="detail" aria-pressed="false">Close-up</button>';const related=treats.filter(x=>x.category===t.category&&x.id!==t.id).slice(0,3);$('#relatedProducts').innerHTML=related.map(x=>`<button class="related-product" data-open="${esc(x.id)}">${imagePath(x)?`<img src="${esc(imagePath(x))}" alt="" loading="lazy" data-product-image>`:'<span aria-hidden="true">✧</span>'}<span>${esc(x.name)}<small>${money(x.price)}</small></span></button>`).join('');updateSaved();if(!$('#productDialog').open)showDialog('productDialog');else $('#productDialog').scrollTop=0;}
 // Missing PNGs try other common extensions once, then show a deliberate brand placeholder.
 document.addEventListener('error',event=>{const img=event.target;if(!(img instanceof HTMLImageElement)||!img.hasAttribute('data-product-image'))return;const original=img.dataset.originalSrc||img.getAttribute('src');img.dataset.originalSrc=original;const candidates=['jpg','webp','jpeg'];const attempt=Number(img.dataset.attempt||0);if(attempt<candidates.length){img.dataset.attempt=attempt+1;img.src=original.replace(/\.[^.\/]+$/,'.'+candidates[attempt]);return;}img.hidden=true;const placeholder=img.parentElement.querySelector('.image-fallback');if(placeholder)placeholder.hidden=false;},true);
 document.addEventListener('click',event=>{const el=event.target.closest('button,a');if(!el)return;
@@ -77,7 +205,7 @@ document.addEventListener('click',event=>{const el=event.target.closest('button,
  if(el.hasAttribute('data-gallery')){const zoom=el.dataset.gallery==='detail';$('#dialogArt').classList.toggle('zoomed',zoom);$$('[data-gallery]').forEach(x=>x.setAttribute('aria-pressed',String(x===el)));return;}
  if(el.hasAttribute('data-quantity')){const id=el.dataset.quantity;if(!valid.has(id))return;bag[id]=Math.min(99,Math.max(0,(bag[id]||0)+Number(el.dataset.delta)));if(!bag[id])delete bag[id];const drawer=!!el.closest('#bagDialog');saveBag();const root=drawer?$('#drawerItems'):$('#cartItems');const next=[...root.querySelectorAll('[data-quantity]')].find(x=>x.dataset.quantity===id&&x.dataset.delta===el.dataset.delta&&!x.disabled);(next|| (drawer?$('#bagDialog .dialog-close'):$('#checkoutButton')))?.focus();return;}
  if(el.hasAttribute('data-remove')){const drawer=!!el.closest('#bagDialog');delete bag[el.dataset.remove];saveBag();(drawer?$('#bagDialog .dialog-close'):$('#checkoutButton'))?.focus();return;}
- if(el.hasAttribute('data-filter')){category=el.dataset.filter;savedOnly=false;limit=12;updateSaved();render();return;}
+ if(el.hasAttribute('data-filter')){if(category!==el.dataset.filter)playSound('category');category=el.dataset.filter;savedOnly=false;limit=12;updateSaved();render();return;}
 });
 $('#search')?.addEventListener('input',()=>{limit=12;render();});$('#sort')?.addEventListener('change',()=>{limit=12;render();});$('#loadMore')?.addEventListener('click',()=>{const firstNew=limit;limit+=12;render();$('#products')?.children[firstNew]?.querySelector('button')?.focus({preventScroll:true});});
 $('#savedToggle')?.addEventListener('click',()=>{savedOnly=!savedOnly;category='all';limit=12;$('#search').value='';updateSaved();render();});
