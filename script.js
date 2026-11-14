@@ -267,3 +267,54 @@ render();renderFeatured();renderBag();updateSaved();
     toggle.setAttribute('aria-label', paused ? 'Resume revolving collection bar' : 'Pause revolving collection bar');
   });
 })();
+
+
+// Anonymous browser presence: only visible pages send a heartbeat.
+(() => {
+  const mark = document.querySelector('header .wordmark');
+  const host = mark?.querySelector('span') || document.querySelector('.fund-top');
+  if (!host) return;
+  const badge = document.createElement('span');
+  badge.className = 'live-visitors';
+  badge.hidden = true;
+  host.append(badge);
+  const storageKey = 'honeyfluff-live-visitor-v1';
+  let visitorId;
+  try {
+    visitorId = localStorage.getItem(storageKey);
+    if (!/^[a-f0-9-]{36}$/.test(visitorId || '')) {
+      visitorId = crypto.randomUUID();
+      localStorage.setItem(storageKey, visitorId);
+    }
+  } catch { visitorId = crypto.randomUUID(); }
+  let busy = false;
+  async function heartbeat() {
+    if (document.hidden || busy) return;
+    busy = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    try {
+      const response = await fetch('https://honey-fluff-sweet-reviews.valiantblimp.chatgpt.site/presence', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: visitorId }), cache: 'no-store', signal: controller.signal
+      });
+      if (!response.ok) throw new Error('Presence unavailable');
+      const result = await response.json();
+      if (!Number.isInteger(result.active) || result.active < 0) throw new Error('Invalid count');
+      badge.textContent = result.active.toLocaleString() + ' active';
+      badge.title = 'Active visitors in the last 90 seconds. One count per browser.';
+      badge.setAttribute('aria-label', result.active + ' active ' + (result.active === 1 ? 'visitor' : 'visitors'));
+      if (mark) mark.setAttribute('aria-label', 'Honey Fluff Goods home — ' + result.active + ' active visitors');
+      badge.hidden = false;
+    } catch {
+      badge.hidden = true;
+      if (mark) mark.setAttribute('aria-label', 'Honey Fluff Goods home');
+    } finally { clearTimeout(timeout); busy = false; }
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) badge.hidden = true;
+    else heartbeat();
+  });
+  heartbeat();
+  setInterval(heartbeat, 30000);
+})();

@@ -505,3 +505,14 @@ body[data-page="index"] .faq { border-top: 1px solid var(--line); }
 .ticker-symbol { display: block; width: 10px; height: 12px; margin: auto; border-inline: 3px solid currentColor; }
 .ticker-toggle[aria-pressed="true"] .ticker-symbol { width: 0; height: 0; border: 6px solid transparent; border-left: 9px solid currentColor; border-right: 0; }
 .flavour-ticker:focus-within .ticker-window { overflow-x: auto; }
+
+/* The live visitor pill fits alongside the logo's small GOODS line. */
+header .wordmark > span { display:flex; align-items:center; gap:8px; }
+header .wordmark .live-visitors, .fund-top .live-visitors {
+  display:inline-flex; align-items:center; gap:4px; margin:0;
+  border:1px solid #bfd3c4; border-radius:999px; padding:3px 6px;
+  background:#eff5ee; color:#36513d; font:500 8px/1.1 var(--sans);
+  letter-spacing:0; white-space:nowrap; text-transform:none;
+}
+.live-visitors::before { content:''; width:5px; height:5px; border-radius:50%; background:#51865e; flex:none; }
+header .wordmark .live-visitors[hidden], .fund-top .live-visitors[hidden] { display:none; }
