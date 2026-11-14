@@ -253,3 +253,17 @@ $('#srFeedback')?.addEventListener('submit',e=>{e.preventDefault();const f=e.cur
 if($('#year'))$('#year').textContent=new Date().getFullYear();
 render();renderFeatured();renderBag();updateSaved();
 })();
+
+
+// The collection ribbon remains readable without JavaScript and with reduced motion.
+(() => {
+  const ribbon = document.querySelector('.flavour-ticker');
+  const toggle = ribbon?.querySelector('.ticker-toggle');
+  if (!toggle) return;
+  toggle.hidden = false;
+  toggle.addEventListener('click', () => {
+    const paused = ribbon.classList.toggle('is-paused');
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.setAttribute('aria-label', paused ? 'Resume revolving collection bar' : 'Pause revolving collection bar');
+  });
+})();
