@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ffcanoreply8-hash.github.io/HONEY-FLUFF-GOODS/sitemap.xml
